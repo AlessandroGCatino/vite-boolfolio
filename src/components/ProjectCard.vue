@@ -6,7 +6,8 @@ export default {
 
     props:{
         coverImage: String,
-        title: String
+        title: String,
+        type: String
     },
 
     data() {
@@ -30,7 +31,7 @@ export default {
         <img class="card-img-top" :src="this.coverImage" alt="Title" />
         <div class="card-body">
             <h4 class="card-title text-capitalize">{{this.title}}</h4>
-            <p class="card-text">Text</p>
+            <p class="card-text">{{this.type}}</p>
         </div>
     </div>    
   

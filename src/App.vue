@@ -39,7 +39,7 @@ export default {
   <div class="container">
     <h2>I tuoi progetti</h2>
     <div class="cards">
-      <ProjectCard v-for="element in projects" :key="element.id" :coverImage="element.cover" :title="element.title"/>
+      <ProjectCard v-for="element in projects" :key="element.id" :coverImage="element.cover" :title="element.title" :type="element.type.name"/>
     </div>
     
   </div>
