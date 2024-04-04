@@ -1,30 +1,55 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+
+import ProjectCard from './components/ProjectCard.vue';
+import axios from "axios";
+
+export default {
+      components: {
+        ProjectCard,
+        axios
+      },
+
+      data() {
+        return {
+            projects: []
+        }
+      },
+
+      methods: {
+        getProjects(){
+            axios.get("http://127.0.0.1:8000/api/datas")
+            .then(
+                res => {
+                    this.projects=res.data.projects
+                    console.log(this.projects)
+                }
+            )
+        }
+      },
+      mounted () {
+        this.getProjects();
+    }
+}
+
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  
+  <h1 class="text-center">Benvenuto</h1>
+  <div class="container">
+    <h2>I tuoi progetti</h2>
+    <div class="cards">
+      <ProjectCard v-for="element in projects" :key="element.id" :coverImage="element.cover" :title="element.title"/>
+    </div>
+    
   </div>
-  <HelloWorld msg="Vite + Vue" />
+
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+<style>
+.cards{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 </style>
