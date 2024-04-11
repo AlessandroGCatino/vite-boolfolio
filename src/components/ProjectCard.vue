@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+import { store } from '../store';
 
 export default {
     name: "ProjectCard",
@@ -13,12 +14,12 @@ export default {
 
     data() {
         return {
-            
+            store
         }
     },
     methods: {
         getSingleProject(){
-            axios.get(`http://127.0.0.1:8000/api/datas/${this.id}`)
+            axios.get(`${store.apiBaseUrl}/api/datas/${this.id}`)
             .then(res=>{
                 if(res.data.success){
                     this.project = res.data.project
@@ -40,7 +41,7 @@ export default {
 <template>
     <router-link :to="{name: 'single-project', params: {id: this.id}}">
         <div class="card">
-            <img v-if="this.coverImage" class="card-img-top" :src="`http://127.0.0.1:8000/storage/${this.coverImage}`" alt="Title" />
+            <img v-if="this.coverImage" class="card-img-top" :src="`${store.apiBaseUrl}/storage/${this.coverImage}`" alt="Title" />
             <div class="card-body">
                 <h4 class="card-title text-capitalize">{{this.title}}</h4>
                 <p class="card-text">{{this.type}}</p>
